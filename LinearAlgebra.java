@@ -23,6 +23,7 @@ public class LinearAlgebra
 		return sum;
 	}
 	
+	// I added some comment.
 	private static void checkLengthsEqual(BigDecimal[] x, BigDecimal[] y)
 	{
 		if(x.length != y.length)
