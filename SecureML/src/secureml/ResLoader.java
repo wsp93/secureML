@@ -7,7 +7,7 @@
  * secureml.insttech.washington.edu
  */
 
-package secureml.gui;
+package secureml;
 
 import java.io.File;
 import java.io.IOException;

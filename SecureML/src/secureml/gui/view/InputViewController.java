@@ -17,8 +17,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import secureml.ResLoader;
 import secureml.feature.extractor.QueryException;
-import secureml.gui.ResLoader;
 
 /**
  * Controller for the InputView.fxml Scene.

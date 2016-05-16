@@ -17,7 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import secureml.gui.ResLoader;
+import secureml.ResLoader;
 import secureml.securesvm.PrivateSVMClient;
 import secureml.svm.SVMClient;
 
