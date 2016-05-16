@@ -10,13 +10,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-<<<<<<< HEAD
 import secureml.ResLoader;
 
-
-
-=======
 /**
  * @author SISI
  * @date May 15,2016
@@ -26,7 +21,6 @@ import secureml.ResLoader;
  * Secure Maching Learning Team
  * secureml.insttech.washington.edu
  */
->>>>>>> SISI
 
 public class NRCExtractor {
 	
