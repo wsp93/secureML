@@ -6,6 +6,8 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+import secureml.ResLoader;
+
 
 
 public class MRCextractor {
@@ -27,11 +29,7 @@ public class MRCextractor {
 	
 	public ArrayList<Double> mrcOnString (String input) throws IOException, QueryException{
 		MRCDatabase mrcDb = null;
-		try {
-			mrcDb = new MRCDatabase(new File(getClass().getClassLoader().getResource("/mrc2.dct").toURI()));
-		} catch (URISyntaxException e1) {
-			e1.printStackTrace();
-		}
+		mrcDb = new MRCDatabase(ResLoader.getInstance().loadFile("mrc2.dct"));
 		ArrayList<Double> result  = new ArrayList<Double>();
 		String[] words = input.toUpperCase().replaceAll("[^\\w]", " ").split("\\s+");
 		int[] mrcFeatures = new int[14];

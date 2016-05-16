@@ -10,6 +10,8 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import secureml.ResLoader;
+
 
 
 
@@ -32,7 +34,7 @@ public class NRCExtractor {
 	public void nrcOnFile (String csvfile) throws IOException {
 		File file = null;
 		try {
-			file = new File(getClass().getClassLoader().getResource("NRC_1.csv").toURI());
+			file = new File(getClass().getClassLoader().getResource("NRCDic.csv").toURI());
 		} catch (URISyntaxException e1) {
 			e1.printStackTrace();
 		}
@@ -132,7 +134,7 @@ public class NRCExtractor {
 	public static HashMap<String, int[]> loadDictionary (String file) {
 		HashMap<String, int[]> dictionary = new HashMap<String, int[]>();
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(file));
+			BufferedReader br = new BufferedReader(new FileReader(ResLoader.getInstance().loadFile(file)));
 			br.readLine();
 			String line;
 			while((line = br.readLine()) != null) {
