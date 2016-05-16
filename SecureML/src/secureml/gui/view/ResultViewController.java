@@ -36,12 +36,15 @@ public class ResultViewController extends Controller {
 	@FXML
 	Label genderLabel;
 	
+	public String[] ageGroup = {"26-", "27-34","35-43","44+"};
+	
 	public void setImage(Image img) {
 		outputImageView.setImage(img);
 	}
 	
 	public void setAge(String age) {
-		ageLabel.setText(age);
+		System.out.println(age);
+		ageLabel.setText(this.ageGroup[Integer.parseInt(age) - 1]);
 	}
 	
 	public void setGender(String gender) {

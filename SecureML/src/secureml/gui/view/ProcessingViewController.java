@@ -38,6 +38,8 @@ public class ProcessingViewController extends Controller {
 	private Image inputImage;
 	private boolean secure;
 	private String outputText;
+	private String gender;
+	private String age;
 
 	@FXML
 	private TextArea bytesTextArea;
@@ -61,12 +63,17 @@ public class ProcessingViewController extends Controller {
 		}
 	}
 
-	public void analyzeData(ArrayList<Double> features) {
+	public void analyzeData(ArrayList<Double> features, ArrayList<Integer> picFeatures) {
 		// TODO incorporate the methods of analysis on inputText and inputImage here!
-		SVMClient svmClient = new SVMClient();
-		String result = svmClient.predict(features);
+		SVMClient svmClient = new SVMClient(features, picFeatures);
+		String result = svmClient.predict();
 		System.out.println(result);
-		this.outputText = result;
+		this.outputText = result.split(",gender")[0];
+		System.out.println(outputText);
+		this.gender = result.split("gender: ")[1].split(",")[0];
+		System.out.println(gender);
+		this.age = result.split("category: ")[1].replaceAll("]", "");
+		System.out.println(age);
 		continueButton.setDisable(false);
 	}
 
@@ -95,7 +102,7 @@ public class ProcessingViewController extends Controller {
 	@FXML
 	private void seeTheResults() {
 		// TODO put the output text in as a parameter of resultView() (or change the parameters for the method if you want to pass it something other than a string)
-		mainApp.resultView(this.outputText, "male", "44+", inputImage);
+		mainApp.resultView(this.outputText, this.gender, this.age, inputImage);
 	}
 
 }
