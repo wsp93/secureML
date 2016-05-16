@@ -11,7 +11,9 @@ package secureml.gui.view;
 
 import java.io.File;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,6 +21,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import secureml.ResLoader;
 import secureml.feature.extractor.QueryException;
+import secureml.gui.Main;
 
 /**
  * Controller for the InputView.fxml Scene.
@@ -43,6 +46,20 @@ public class InputViewController extends Controller {
 	/** The ImageView that the user's image input will be displayed in. */
 	@FXML
 	private ImageView inputImageView;
+	
+	@FXML
+	private Button clearButton;
+	@FXML
+	private Button secureButton;
+	
+	@Override
+	public void linkMainController(Main mainApp) {
+		super.linkMainController(mainApp);
+		clearButton.disableProperty().bind(
+				Bindings.isEmpty(inputTextArea.textProperty()));
+		secureButton.disableProperty().bind(
+				Bindings.isEmpty(inputTextArea.textProperty()));
+	}
 	
 	/**
 	 * This method is called when the user presses the "Analyze in the Clear" button.
