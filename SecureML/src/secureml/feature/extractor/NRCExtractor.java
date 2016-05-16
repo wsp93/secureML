@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import secureml.ResLoader;
 
 /**
  * @author SISI
@@ -36,7 +37,7 @@ public class NRCExtractor {
 	public void nrcOnFile (String csvfile) throws IOException {
 		File file = null;
 		try {
-			file = new File(getClass().getClassLoader().getResource("NRC_1.csv").toURI());
+			file = new File(getClass().getClassLoader().getResource("NRCDic.csv").toURI());
 		} catch (URISyntaxException e1) {
 			e1.printStackTrace();
 		}

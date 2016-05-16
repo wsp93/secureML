@@ -7,6 +7,8 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+import secureml.ResLoader;
+
 /**
  * @author SISI
  * @date May 15,2016

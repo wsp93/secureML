@@ -36,6 +36,8 @@ public class Main extends Application {
 
 	/** The name of the application, displayed in the top bar of the GUI frame. */
 	private static final String APP_NAME = "Get To Know Your VIRTUAL Identity";
+	private static final int MIN_WIDTH = 800;
+	private static final int MIN_HEIGHT = 500;
 
 	/** The primary stage for this application. */
 	public Stage primaryStage;
@@ -46,7 +48,12 @@ public class Main extends Application {
 	public void inputView() {
 		try {
 			final FXMLLoader loader = new FXMLLoader(getClass().getResource("view/InputView.fxml"));
-			final Scene inputScene = new Scene((Pane) loader.load());
+			Scene inputScene;
+			if (primaryStage.getScene() == null) {
+				inputScene = new Scene((Pane) loader.load());
+			} else {
+				inputScene = new Scene((Pane) loader.load(), primaryStage.getScene().getWidth(), primaryStage.getScene().getHeight());
+			}
 			inputScene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(inputScene);
 			((Controller) loader.getController()).linkMainController(this);
@@ -69,7 +76,7 @@ public class Main extends Application {
 	public void processingView(String inputText, boolean secure, Image inputImage) throws QueryException {
 		try {
 			final FXMLLoader loader = new FXMLLoader(getClass().getResource("view/ProcessingView.fxml"));
-			final Scene processingScene = new Scene((Pane) loader.load());
+			final Scene processingScene = new Scene((Pane) loader.load(), primaryStage.getScene().getWidth(), primaryStage.getScene().getHeight());
 			processingScene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(processingScene);
 			ProcessingViewController controller = (ProcessingViewController) loader.getController();
@@ -113,7 +120,7 @@ public class Main extends Application {
 	public void resultView(String outputText, String age, String gender, Image img) {
 		try {
 			final FXMLLoader loader = new FXMLLoader(getClass().getResource("view/ResultView.fxml"));
-			final Scene resultScene = new Scene((Pane) loader.load());
+			final Scene resultScene = new Scene((Pane) loader.load(), primaryStage.getScene().getWidth(), primaryStage.getScene().getHeight());
 			resultScene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(resultScene);
 			ResultViewController controller = (ResultViewController) loader.getController();
@@ -134,6 +141,8 @@ public class Main extends Application {
 	private void initStage(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		primaryStage.setTitle(APP_NAME);
+		primaryStage.setMinWidth(MIN_WIDTH);
+		primaryStage.setMinHeight(MIN_HEIGHT);
 		primaryStage.getIcons().add(new Image("uw-icon.png"));
 	}
 

@@ -30,7 +30,7 @@ import secureml.svm.SVMClient;
 public class ProcessingViewController extends Controller {
 	
 	/** The gif animation to indicate that the program is processing data securely. */
-	private static final Image SECURE_GIF = ResLoader.getInstance().loadImage("in-the-clear-animation.gif");
+	private static final Image SECURE_GIF = ResLoader.getInstance().loadImage("secure-animation.gif");
 	/** The gif animation to indicate that the program is processing data in the clear. */
 	private static final Image IN_THE_CLEAR_GIF = ResLoader.getInstance().loadImage("in-the-clear-animation.gif");
 
