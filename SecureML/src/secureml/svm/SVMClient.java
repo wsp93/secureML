@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+// test git from eclipse
 public class SVMClient
 {
 	public static final String hostName = "140.142.71.66";
