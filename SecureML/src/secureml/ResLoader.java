@@ -38,7 +38,7 @@ public final class ResLoader {
 	/**
 	 * Load an image from a file in the res folder.
 	 * @param filename the name of the file to load, including extension.
-	 * @return A BufferedImage containing the information provided in the specified image file.
+	 * @return An image containing the information provided in the specified image file.
 	 * 		   Returns null if there is an error loading the image, or if the input filename is null.
 	 */
 	public Image loadImage(String filename) {
