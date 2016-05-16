@@ -4,10 +4,18 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 
+import secureml.ResLoader;
+
 /**
  * @author SISI
- * @May 3,2016
+ * @date May 15,2016
+ * 
+ * developed for
+ * University of Washington, Tacoma
+ * Secure Maching Learning Team
+ * secureml.insttech.washington.edu
  */
+
 public class TextSummary {
 	
 	int[] big5; // an array of integers where 1 means true and 0 means false in the order of ext, neu, agr, con, ope.
@@ -47,7 +55,7 @@ public class TextSummary {
 	 * @throws Exception
 	 */
 	public void loadDictionary(Map<String, String> dict) throws Exception {
-		BufferedReader br = new BufferedReader(new FileReader("res/dictionary"));
+		BufferedReader br = new BufferedReader(new FileReader(ResLoader.getInstance().loadFile("dictionary")));
 		String line = br.readLine();
 		while (line != null) {
 			line = line.replace("\"", "");
@@ -62,7 +70,7 @@ public class TextSummary {
 	 * @throws Exception - file IO exception
 	 */
 	public void loadDescription(Map<String, String> desc) throws Exception {
-		BufferedReader br = new BufferedReader(new FileReader("res/description"));
+		BufferedReader br = new BufferedReader(new FileReader(ResLoader.getInstance().loadFile("description")));
 		String line = br.readLine();
 		int counter = 0;
 		while (line != null) {

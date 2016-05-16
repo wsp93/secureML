@@ -9,8 +9,7 @@ import java.util.regex.Pattern;
 
 
 /**
- * Interface to the LIWC dictionary, implementing patterns for each LIWC category
- * based on the LIWC.CAT file.
+ * Extract LIWC 19 features (the features that are not related to LIWC dictionary)
  */
 public class LIWCDictionary {
 
@@ -38,10 +37,6 @@ public class LIWCDictionary {
 		Map<String,Double> counts = new LinkedHashMap<String, Double>(map.size());
 		String[] words = tokenize(text);
 		String[] sentences = splitSentences(text);
-		/*System.err.println("Input text splitted into " + words.length
-				+ " words and " + sentences.length + " sentences");
-		*/
-		// word count (NOT A PROPER FEATURE)
 		if (absoluteCounts) { counts.put("WC", new Double(words.length)); }
 		counts.put("WPS", new Double(1.0 * words.length / sentences.length));
 		
