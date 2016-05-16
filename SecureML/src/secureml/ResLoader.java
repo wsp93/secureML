@@ -42,13 +42,12 @@ public final class ResLoader {
 	 * 		   Returns null if there is an error loading the image, or if the input filename is null.
 	 */
 	public Image loadImage(String filename) {
-		if (filename != null) {
-			try {
-				return SwingFXUtils.toFXImage(ImageIO.read(loadFile(filename)), null);
-			} catch (IOException e) {
-				System.out.printf("Error loading image: %s\n", filename);
-				e.printStackTrace();
+		try {
+			if (filename != null) {
+				return new Image(filename);
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return null;
 	}
