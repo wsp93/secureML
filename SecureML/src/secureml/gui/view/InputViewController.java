@@ -96,6 +96,7 @@ public class InputViewController extends Controller {
 	/**
 	 * Gets the text input entered by the user.
 	 * @return the return String of {@link #inputTextArea}.getText().
+	 * 		   Will be an empty String if the user has not input any text.
 	 */
 	public String getTextInput() {
 		return inputTextArea.getText();
