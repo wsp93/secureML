@@ -1,0 +1,12 @@
+.button {
+    -fx-background-color: #535876;
+    -fx-text-fill: white; 
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.text-area {
+    -fx-background-color: transparent;
+}

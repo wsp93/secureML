@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane minHeight="330.0" minWidth="510.0" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="secureml.gui.view.InputViewController">
+   <children>
+      <SplitPane dividerPositions="0.6942355889724311" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="100.0" minWidth="240.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TextArea fx:id="inputTextArea" layoutX="14.0" layoutY="14.0" prefHeight="369.0" prefWidth="341.0" promptText="Enter your text here..." wrapText="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </TextArea>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="300.0" minWidth="240.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <VBox alignment="CENTER" minWidth="240.0" prefHeight="200.0" prefWidth="344.0" spacing="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                     <children>
+                        <ImageView fx:id="inputImageView" fitHeight="200.0" fitWidth="200.0" onMousePressed="#chooseImage" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../res/prompt-icon.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="10.0" vgap="10.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#analyzeInTheClearButtonPressed" text="Analyze in the Clear" />
+                              <Button mnemonicParsing="false" onAction="#analyzePrivatelyButtonPressed" text="Analyze Privately" />
+                           </children>
+                        </FlowPane>
+                        <Button mnemonicParsing="false" onAction="#clearEntries" text="Clear Entries" />
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
