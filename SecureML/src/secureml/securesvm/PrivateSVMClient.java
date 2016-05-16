@@ -12,7 +12,7 @@ public class PrivateSVMClient {
 	
 	public static PrivateSVMClient globalClient;
 
-	public static long featureMultiplier = 100000;
+	public static long featureMultiplier = 1000000;
 
 	public static String trustedInitializerAddress = "secureml.insttech.washington.edu";
 	public static final int trustedInitializerPort = 1235;
