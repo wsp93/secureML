@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import secureml.feature.extractor.LIWCExtractor;
+import secureml.feature.extractor.LandmarkExtractor;
 import secureml.feature.extractor.MRCextractor;
 import secureml.feature.extractor.NRCExtractor;
 import secureml.feature.extractor.QueryException;
@@ -87,6 +88,7 @@ public class Main extends Application {
 			LIWCExtractor liwc = new LIWCExtractor();
 			MRCextractor mrc = new MRCextractor();
 			NRCExtractor nrc = new NRCExtractor();
+			LandmarkExtractor lm = new LandmarkExtractor();
 
 			ArrayList<Double> textFeatures = nrc.nrcOnString(inputText); 
 			textFeatures.addAll(mrc.mrcOnString(inputText));
