@@ -11,6 +11,7 @@ package secureml.gui;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -75,7 +76,7 @@ public class Main extends Application {
 	 * @param inputImage input Image to analyze.
 	 * @throws QueryException 
 	 */
-	public void processingView(String inputText, boolean secure, Image inputImage) throws QueryException {
+	public void processingView(String inputText, boolean secure, Image inputImage, String imagePath) throws QueryException {
 		try {
 			final FXMLLoader loader = new FXMLLoader(getClass().getResource("view/ProcessingView.fxml"));
 			final Scene processingScene = new Scene((Pane) loader.load(), primaryStage.getScene().getWidth(), primaryStage.getScene().getHeight());
@@ -88,15 +89,14 @@ public class Main extends Application {
 			LIWCExtractor liwc = new LIWCExtractor();
 			MRCextractor mrc = new MRCextractor();
 			NRCExtractor nrc = new NRCExtractor();
-			LandmarkExtractor lm = new LandmarkExtractor();
 
 			ArrayList<Double> textFeatures = nrc.nrcOnString(inputText); 
 			textFeatures.addAll(mrc.mrcOnString(inputText));
 			textFeatures.addAll(liwc.extract(inputText));
 			
 			//136 Image features
-			ArrayList<Integer> picFeatures = new ArrayList<>(Arrays.asList(273,389,272,441,278,493,289,547,301,600,324,649,357,691,402,723,458,733,518,725,576,698,626,663,662,619,685,566,696,510,702,454,705,397,289,337,312,317,346,313,380,324,412,341,486,341,523,321,564,309,604,315,637,334,448,382,446,409,444,438,441,468,414,506,429,511,447,516,466,511,485,505,328,393,349,384,375,384,399,393,374,405,348,406,510,393,532,382,560,383,586,390,562,403,535,404,375,599,404,584,429,573,446,578,463,573,495,584,535,598,497,615,468,622,449,624,430,623,405,617,389,598,430,592,447,594,465,592,517,598,465,594,447,596,430,595));
-
+			List<Integer> picFeatures = LandmarkExtractor.extract(imagePath);
+					
 			if (!secure) {
 				String outputText = "Analyzing In Clear...\n";
 				outputText += "Message sending:\n";

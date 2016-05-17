@@ -36,7 +36,7 @@ public class ResultViewController extends Controller {
 	@FXML
 	Label genderLabel;
 	
-	public String[] ageGroup = {"26-", "27-34","35-43","44+"};
+	public String[] ageGroup = {"under 26", "27-34","35-43","44+"};
 	
 	public void setImage(Image img) {
 		outputImageView.setImage(img);
