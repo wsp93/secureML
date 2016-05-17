@@ -13,12 +13,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.opencv.core.Core;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import secureml.feature.extractor.FaceDetection;
 import secureml.feature.extractor.LIWCExtractor;
 import secureml.feature.extractor.LandmarkExtractor;
 import secureml.feature.extractor.MRCextractor;
@@ -94,8 +97,11 @@ public class Main extends Application {
 			textFeatures.addAll(mrc.mrcOnString(inputText));
 			textFeatures.addAll(liwc.extract(inputText));
 			
+			System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+			new FaceDetection().cropFaces(imagePath.substring(5), "res/");
+			
 			//136 Image features
-			List<Integer> picFeatures = LandmarkExtractor.extract(imagePath);
+			List<Integer> picFeatures = LandmarkExtractor.extract("res/croppedImage.png");
 					
 			if (!secure) {
 				String outputText = "Analyzing In Clear...\n";
