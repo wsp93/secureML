@@ -17,10 +17,9 @@ public class LandmarkExtractor {
 		
 		try
 		{
-			Process p = Runtime.getRuntime().exec("python src/secureml/feature/extractor/face_landmark_detection.py "
-					+ "src/secureml/feature/extractor/shape_predictor_68_face_landmarks.dat "
+			Process p = Runtime.getRuntime().exec("python res/face_landmark_detection.py "
+					+ "res/shape_predictor_68_face_landmarks.dat "
 					+ path);
-			System.out.println(path);
 			BufferedReader stdInput = new BufferedReader(new
 	                									InputStreamReader(p.getInputStream()));
 			while ((s = stdInput.readLine()) != null) 

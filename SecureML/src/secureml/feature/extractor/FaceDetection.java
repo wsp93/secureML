@@ -33,7 +33,7 @@ public class FaceDetection {
 
 		// Create a face detector from the cascade file in the resources
 		// directory.
-		CascadeClassifier faceDetector = new CascadeClassifier("src/secureml/feature/extractor/lbpcascade_frontalface.xml");
+		CascadeClassifier faceDetector = new CascadeClassifier("res/lbpcascade_frontalface.xml");
 		Mat image = Imgcodecs.imread(sourceImagePath);
 
 		// Detect faces in the image.
