@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 import org.opencv.core.Core;
 
@@ -21,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import secureml.ResLoader;
 import secureml.feature.extractor.FaceDetection;
 import secureml.feature.extractor.LIWCExtractor;
 import secureml.feature.extractor.LandmarkExtractor;
@@ -31,6 +33,7 @@ import secureml.gui.view.Controller;
 import secureml.gui.view.ProcessingViewController;
 import secureml.gui.view.ResultViewController;
 import secureml.securesvm.PrivateSVMClient;
+import secureml.svm.StringUtils;
 
 /**
  * Starting driver and main controller for the program.
@@ -105,9 +108,18 @@ public class Main extends Application {
 					
 			if (!secure) {
 				String outputText = "Analyzing In Clear...\n";
-				outputText += "Message sending:\n";
+				outputText += "Text features:\n";
+				
+				StringUtils su = new StringUtils();
+				Scanner inputScanner = new Scanner(ResLoader.getInstance().loadFile("textFeatureNames"));
+				List<String> textFeaturesNames = su.parseStringList(inputScanner);
+				
 				for (int i = 0; i < textFeatures.size(); i++) {
-					outputText += textFeatures.get(i) + "\n";
+					outputText += textFeaturesNames.get(i) + " : " +textFeatures.get(i) + "\n";
+				}
+				outputText += "Image features:\n";
+				for (int i = 0; i < picFeatures.size(); i++) {
+					outputText += picFeatures.get(i) + "\n";
 				}
 				controller.setInputs(outputText, secure, inputImage);
 				
