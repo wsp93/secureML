@@ -2,6 +2,7 @@ package secureml.svm;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
+import java.util.List;
 
 
 // test git from eclipse
@@ -13,7 +14,7 @@ public class SVMClient
 //	public static final String picInputFile = "testPicInput.txt";
 	
 	private ArrayList<Double> textFeatures;
-	private ArrayList<Integer> picFeatures;
+	private List<Integer> picFeatures;
 	
 	public String predict() {
 		try
@@ -86,10 +87,10 @@ public class SVMClient
 		System.out.println(client.predict());
 	}
 	*/
-	public SVMClient(ArrayList<Double> textFeatures, ArrayList<Integer> imageFeatures) 
+	public SVMClient(ArrayList<Double> textFeatures, List<Integer> picFeatures2) 
 	{
 		this.textFeatures = textFeatures;
-		this.picFeatures = imageFeatures;
+		this.picFeatures = picFeatures2;
 	}
 
 	public String runProtocol(BufferedReader in, PrintWriter out) throws IOException

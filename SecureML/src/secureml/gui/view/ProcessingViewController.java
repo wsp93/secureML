@@ -11,6 +11,7 @@ package secureml.gui.view;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -63,7 +64,7 @@ public class ProcessingViewController extends Controller {
 		}
 	}
 
-	public void analyzeData(ArrayList<Double> features, ArrayList<Integer> picFeatures) {
+	public void analyzeData(ArrayList<Double> features, List<Integer> picFeatures) {
 		// TODO incorporate the methods of analysis on inputText and inputImage here!
 		SVMClient svmClient = new SVMClient(features, picFeatures);
 		String result = svmClient.predict();
@@ -86,6 +87,8 @@ public class ProcessingViewController extends Controller {
 				outputText = results[0] + " " + results[1] + " " + results[2] + " " + 
 						results[3] + " " + results[4];
 				bytesTextArea.appendText("\n<<< Classification Complete >>>\n");
+				age = "1";
+				gender = "male";
 				continueButton.setDisable(false);
 			}
 		}.start();

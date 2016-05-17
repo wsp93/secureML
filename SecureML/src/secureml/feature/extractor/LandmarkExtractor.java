@@ -3,10 +3,15 @@ package secureml.feature.extractor;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class LandmarkExtractor {
-	public LandmarkExtractor() {
+	
+	public static List<Integer> extract(String path)
+	{
+		List<Integer> list = new ArrayList<Integer>();
 		String s = "";
 		String result = "";
 		
@@ -14,7 +19,8 @@ public class LandmarkExtractor {
 		{
 			Process p = Runtime.getRuntime().exec("python src/secureml/feature/extractor/face_landmark_detection.py "
 					+ "src/secureml/feature/extractor/shape_predictor_68_face_landmarks.dat "
-					+ "src/secureml/feature/extractor/me.jpg ");
+					+ path.substring(5));
+			System.out.println(path);
 			BufferedReader stdInput = new BufferedReader(new
 	                									InputStreamReader(p.getInputStream()));
 			while ((s = stdInput.readLine()) != null) 
@@ -22,12 +28,34 @@ public class LandmarkExtractor {
 	             result += s + "\n";
 			}
 			
-			System.out.println(result);
+			return parseResult(result);
 		}
 		catch(IOException e)
 		{
 			e.printStackTrace();
 		}
 		
+		return list;
+	}
+	
+	private static List<Integer> parseResult(String resultStr)
+	{
+		List<Integer> list = new ArrayList<Integer>();
+		
+		Scanner lineScanner = new Scanner(resultStr);
+		while(lineScanner.hasNextLine())
+		{
+			String line = lineScanner.nextLine(); // (x, y)
+			String noParens = line.substring(1, line.length() - 1); // x, y
+			Scanner pointScanner = new Scanner(noParens);
+			pointScanner.useDelimiter(", ");
+			
+			while(pointScanner.hasNextInt())
+			{
+				list.add(pointScanner.nextInt());
+			}
+		}
+		
+		return list;
 	}
 }

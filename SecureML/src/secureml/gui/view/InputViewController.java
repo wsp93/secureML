@@ -46,6 +46,7 @@ public class InputViewController extends Controller {
 	/** The ImageView that the user's image input will be displayed in. */
 	@FXML
 	private ImageView inputImageView;
+	private String imageFilePath;
 	
 	@FXML
 	private Button clearButton;
@@ -68,7 +69,7 @@ public class InputViewController extends Controller {
 	 */
 	@FXML
 	private void analyzeInTheClearButtonPressed() throws QueryException {
-		mainApp.processingView(getTextInput(), false, getImageInput());
+		mainApp.processingView(getTextInput(), false, getImageInput(), imageFilePath);
 	}
 	
 	/**
@@ -78,7 +79,7 @@ public class InputViewController extends Controller {
 	@FXML
 	private void analyzePrivatelyButtonPressed() throws QueryException {
 		//should be two different from the analyze in the clear 
-		mainApp.processingView(getTextInput(), true, getImageInput());
+		mainApp.processingView(getTextInput(), true, getImageInput(), imageFilePath);
 	}
 	
 	/**
@@ -94,6 +95,7 @@ public class InputViewController extends Controller {
 		File selection = chooser.showOpenDialog(mainApp.primaryStage);
 		if (selection != null) {
 			inputImageView.setImage(new Image(selection.toURI().toString()));
+			imageFilePath = selection.toURI().toString();
 			imageChosen = true;
 		}
 	}
