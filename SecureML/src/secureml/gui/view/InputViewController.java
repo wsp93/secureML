@@ -55,10 +55,11 @@ public class InputViewController extends Controller {
 	@Override
 	public void linkMainController(Main mainApp) {
 		super.linkMainController(mainApp);
-		clearButton.disableProperty().bind(
-				Bindings.isEmpty(inputTextArea.textProperty()));
-		secureButton.disableProperty().bind(
-				Bindings.isEmpty(inputTextArea.textProperty()));
+//		clearButton.disableProperty().bind(
+//				Bindings.isEmpty(inputTextArea.textProperty()));
+//		secureButton.disableProperty().bind(
+//				Bindings.isEmpty(inputTextArea.textProperty()));
+		inputImageView.setImage(PROMPT_IMAGE);
 	}
 	
 	/**

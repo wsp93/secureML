@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
@@ -28,17 +27,14 @@
                   <VBox alignment="CENTER" minWidth="240.0" prefHeight="200.0" prefWidth="344.0" spacing="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <children>
                         <ImageView fx:id="inputImageView" fitHeight="200.0" fitWidth="200.0" onMousePressed="#chooseImage" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../res/prompt-icon.png" />
-                           </image>
                            <VBox.margin>
                               <Insets bottom="20.0" />
                            </VBox.margin>
                         </ImageView>
                         <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="10.0" vgap="10.0">
                            <children>
-                              <Button fx:id="clearButton" disable="true" mnemonicParsing="false" onAction="#analyzeInTheClearButtonPressed" text="Analyze in the Clear" />
-                              <Button fx:id="secureButton" disable="true" mnemonicParsing="false" onAction="#analyzePrivatelyButtonPressed" text="Analyze Privately" />
+                              <Button mnemonicParsing="false" onAction="#analyzeInTheClearButtonPressed" text="Analyze in the Clear" />
+                              <Button mnemonicParsing="false" onAction="#analyzePrivatelyButtonPressed" text="Analyze Privately" />
                            </children>
                         </FlowPane>
                         <Button mnemonicParsing="false" onAction="#clearEntries" text="Clear Entries" />
