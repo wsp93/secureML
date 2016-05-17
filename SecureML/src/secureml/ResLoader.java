@@ -44,7 +44,7 @@ public final class ResLoader {
 	public Image loadImage(String filename) {
 		try {
 			if (filename != null) {
-				return new Image(filename);
+				return new Image("/" + filename);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -60,12 +60,12 @@ public final class ResLoader {
 	 */
 	public File loadFile(String filename) {
 		if (filename != null) {
-			try {
-				return new File(getClass().getClassLoader().getResource(filename).toURI());
-			} catch (URISyntaxException e) {
-				System.out.printf("Error loading file: %s\n", filename);
-				e.printStackTrace();
-			}
+//			try {
+				return new File(this.getClass().getClassLoader().getResource(filename).getFile());
+//			} catch (URISyntaxException e) {
+//				System.out.printf("Error loading file: %s\n", filename);
+//				e.printStackTrace();
+//			}
 		}
 		return null;
 	}
