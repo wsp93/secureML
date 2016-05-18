@@ -101,18 +101,19 @@ public class Main extends Application {
 			textFeatures.addAll(liwc.extract(inputText));
 			
 			System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+			System.out.println(imagePath);
 			new FaceDetection().cropFaces(imagePath.substring(5), "res/");
 			
 			//136 Image features
 			List<Integer> picFeatures = LandmarkExtractor.extract("res/croppedImage.png");
+			System.out.println(picFeatures.size());
 					
 			if (!secure) {
 				String outputText = "Analyzing In Clear...\n";
 				outputText += "Text features:\n";
 				
-				StringUtils su = new StringUtils();
 				Scanner inputScanner = new Scanner(ResLoader.getInstance().loadFile("textFeatureNames"));
-				List<String> textFeaturesNames = su.parseStringList(inputScanner);
+				List<String> textFeaturesNames = StringUtils.parseStringList(inputScanner);
 				
 				for (int i = 0; i < textFeatures.size(); i++) {
 					outputText += textFeaturesNames.get(i) + " : " +textFeatures.get(i) + "\n";
@@ -127,11 +128,11 @@ public class Main extends Application {
 				controller.analyzeData(textFeatures, picFeatures);
 			} else { //Secure is greenlit << Caleb
 				System.out.println(textFeatures.size());
-				double[] featureArray = new double[PrivateSVMClient.numFeatures];
-				for (int p = 0; p < PrivateSVMClient.numFeatures; p++)
+				double[] featureArray = new double[PrivateSVMClient.numTextFeatures];
+				for (int p = 0; p < PrivateSVMClient.numTextFeatures; p++)
 					featureArray[p] = textFeatures.get(p);
 				controller.setInputs("<<< Protocol Log >>>\n\n", secure, inputImage);
-				controller.secureAnalyzeData(featureArray);
+				controller.secureAnalyzeData(featureArray, picFeatures);
 			}
 		} catch (final IOException e) {
 			e.printStackTrace();

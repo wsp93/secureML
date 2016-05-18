@@ -78,17 +78,19 @@ public class ProcessingViewController extends Controller {
 		continueButton.setDisable(false);
 	}
 
-	public void secureAnalyzeData(double[] features) {
+	public void secureAnalyzeData(double[] features, List<Integer> picFeatures) {
 		// TODO incorporate the methods of analysis on inputText and inputImage here!
 		outputText = "";
 		new Thread() {
 			public void run() {
-				boolean[] results = PrivateSVMClient.globalClient.run(features, bytesTextArea);
+				boolean[] results = PrivateSVMClient.globalClient.runTextPrediction(features, bytesTextArea);
 				outputText = results[0] + " " + results[1] + " " + results[2] + " " + 
 						results[3] + " " + results[4];
+				boolean[] resultsImg = PrivateSVMClient.globalClient.runImagePrediction(picFeatures, bytesTextArea);
+				
 				bytesTextArea.appendText("\n<<< Classification Complete >>>\n");
-				age = "1";
-				gender = "male";
+				age = "" + (resultsImg[1] ? (resultsImg[2] ? 2 : 1 ) : (resultsImg[3] ? 4 : 3));
+				gender = (resultsImg[0] ? "male" : "female");
 				continueButton.setDisable(false);
 			}
 		}.start();
