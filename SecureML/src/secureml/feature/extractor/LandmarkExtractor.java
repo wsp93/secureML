@@ -53,7 +53,10 @@ public class LandmarkExtractor {
 			{
 				list.add(pointScanner.nextInt());
 			}
+			
+			pointScanner.close();
 		}
+		lineScanner.close();
 		
 		return list;
 	}

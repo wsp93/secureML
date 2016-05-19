@@ -8,9 +8,9 @@
  */
 
 package secureml.gui;
+
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,11 +19,15 @@ import org.opencv.core.Core;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import secureml.Constants;
 import secureml.ResLoader;
 import secureml.feature.extractor.FaceDetection;
+import secureml.feature.extractor.FaceDetectionException;
 import secureml.feature.extractor.LIWCExtractor;
 import secureml.feature.extractor.LandmarkExtractor;
 import secureml.feature.extractor.MRCextractor;
@@ -42,12 +46,6 @@ import secureml.svm.StringUtils;
  * @version 0.5
  */
 public class Main extends Application {
-
-	/** The name of the application, displayed in the top bar of the GUI frame. */
-	private static final String APP_NAME = "Get To Know Your VIRTUAL Identity";
-	private static final int MIN_WIDTH = 800;
-	private static final int MIN_HEIGHT = 500;
-
 	/** The primary stage for this application. */
 	public Stage primaryStage;
 
@@ -81,6 +79,7 @@ public class Main extends Application {
 	 * @param secure indicates whether to perform a secure analysis or an in the clear analysis.
 	 * @param inputImage input Image to analyze.
 	 * @throws QueryException 
+	 * @throws FaceDetectionException 
 	 */
 	public void processingView(String inputText, boolean secure, Image inputImage, String imagePath) throws QueryException {
 		try {
@@ -102,7 +101,20 @@ public class Main extends Application {
 			
 			System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 			System.out.println(imagePath);
-			new FaceDetection().cropFaces(imagePath.substring(5), "res/");
+			try
+			{
+				FaceDetection.cropFaces(imagePath.substring(Constants.PATH_START_INDEX), "res/");
+			}
+			catch(FaceDetectionException e)
+			{
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle(e.getMessage());
+				alert.setHeaderText(e.getMessage());
+				alert.setContentText("Please choose a different image.");
+				alert.showAndWait();
+				
+				inputView();
+			}
 			
 			//136 Image features
 			List<Integer> picFeatures = LandmarkExtractor.extract("res/croppedImage.png");
@@ -165,9 +177,9 @@ public class Main extends Application {
 	 */
 	private void initStage(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-		primaryStage.setTitle(APP_NAME);
-		primaryStage.setMinWidth(MIN_WIDTH);
-		primaryStage.setMinHeight(MIN_HEIGHT);
+		primaryStage.setTitle(Constants.APP_NAME);
+		primaryStage.setMinWidth(Constants.MIN_WIDTH);
+		primaryStage.setMinHeight(Constants.MIN_HEIGHT);
 		primaryStage.getIcons().add(new Image("uw-icon.png"));
 	}
 

@@ -1,3 +1,6 @@
 /secureml/
 /textFeatureNames
 /uw-icon.png
+/face_landmark_detection.py
+/lbpcascade_frontalface.xml
+/shape_predictor_68_face_landmarks.dat

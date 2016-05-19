@@ -1,10 +1,5 @@
 package secureml.feature.extractor;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
-import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfRect;
 import org.opencv.core.Point;
@@ -27,8 +22,9 @@ public class FaceDetection {
 	 *
 	 * @param sourceImagePath Path to the image to scan for faces.
 	 * @param outputImagePath Path to the directory where cropped faces will be saved.
+	 * @throws FaceDetectionException If 0 or more than 1 face detected. 
 	 */
-	public void cropFaces(String sourceImagePath, String outputImagePath) {
+	public static void cropFaces(String sourceImagePath, String outputImagePath) throws FaceDetectionException {
 		System.out.println("Running FaceDetection");
 
 		// Create a face detector from the cascade file in the resources
@@ -42,27 +38,20 @@ public class FaceDetection {
 		faceDetector.detectMultiScale(image, faceDetections);
 
 		System.out.println(String.format("Detected %s faces", faceDetections.toArray().length));
+		boolean noFaceDetected = faceDetections.toArray().length == 0;
+		boolean moreThanOneFace = faceDetections.toArray().length > 1;
+		if(noFaceDetected) throw new FaceDetectionException("No Face Detected");
+		if(moreThanOneFace) throw new FaceDetectionException("More Than One Face Detected");
 
-		// Crop each face out and save as a separate image
-//		int iterator = 1;
-//		for (Rect rect : faceDetections.toArray()) {
-			Rect rect = faceDetections.toArray()[0];
-			Mat croppedImage = new Mat(image, generateWiderRectangle(rect, image.width(), image.height()));
-		    String croppedImageFilePath = outputImagePath + "croppedImage.png";
-		    System.out.println("Writing " + croppedImageFilePath);
-		    Imgcodecs.imwrite(croppedImageFilePath, croppedImage);
-//		    iterator++;
-//		}
+		// Crop the face out and save as a separate image
+		Rect rect = faceDetections.toArray()[0];
+		Mat croppedImage = new Mat(image, generateWiderRectangle(rect, image.width(), image.height()));
+	    String croppedImageFilePath = outputImagePath + "croppedImage.png";
+	    System.out.println("Writing " + croppedImageFilePath);
+	    Imgcodecs.imwrite(croppedImageFilePath, croppedImage);
 
-		// Draw a bounding box around each face
-//		for (Rect rect: faceDetections.toArray()) {
-			Imgproc.rectangle(image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255, 0));
-//		}
-
-		// Save the visualized detection.
-//		String filename = outputImagePath + "faceDetection.png";
-//		System.out.println(String.format("Writing %s", filename));
-//		Imgcodecs.imwrite(filename, image);
+		// Draw a bounding box around the face
+		Imgproc.rectangle(image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255, 0));
 	}
 
 
@@ -75,7 +64,7 @@ public class FaceDetection {
 	 * @param height Height of the image. This restricts the boudns of the scaled rectangle.
 	 * @return
 	 */
-	private Rect generateWiderRectangle(Rect rect, int width, int height) {
+	private static Rect generateWiderRectangle(Rect rect, int width, int height) {
 		Rect widerRect = rect.clone();
 
 		double newX = (int) (rect.x - (rect.width * CROP_MARGIN));
@@ -101,12 +90,4 @@ public class FaceDetection {
 		widerRect.set(new double[]{newX, newY, newWidth, newHeight});
 		return widerRect;
 	}
-
-//	public static void main(String[] args) throws FileNotFoundException {
-//	    // Load the native library.
-//	    System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-//	    new FaceDetection().cropFaces("src/secureml/feature/extractor/me.jpg", "res/");
-//	}
-
-
 }
