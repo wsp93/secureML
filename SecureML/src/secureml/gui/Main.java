@@ -24,7 +24,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import secureml.Constants;
+import secureml.Const;
 import secureml.ResLoader;
 import secureml.feature.extractor.FaceDetection;
 import secureml.feature.extractor.FaceDetectionException;
@@ -54,14 +54,14 @@ public class Main extends Application {
 	 */
 	public void inputView() {
 		try {
-			final FXMLLoader loader = new FXMLLoader(getClass().getResource("view/InputView.fxml"));
+			final FXMLLoader loader = new FXMLLoader(getClass().getResource(Const.INPUT_VIEW_PATH));
 			Scene inputScene;
 			if (primaryStage.getScene() == null) {
 				inputScene = new Scene((Pane) loader.load());
 			} else {
 				inputScene = new Scene((Pane) loader.load(), primaryStage.getScene().getWidth(), primaryStage.getScene().getHeight());
 			}
-			inputScene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			inputScene.getStylesheets().add(getClass().getResource(Const.APPLICATION_LAYOUT_PATH).toExternalForm());
 			primaryStage.setScene(inputScene);
 			((Controller) loader.getController()).linkMainController(this);
 			primaryStage.show();
@@ -83,9 +83,9 @@ public class Main extends Application {
 	 */
 	public void processingView(String inputText, boolean secure, Image inputImage, String imagePath) throws QueryException {
 		try {
-			final FXMLLoader loader = new FXMLLoader(getClass().getResource("view/ProcessingView.fxml"));
+			final FXMLLoader loader = new FXMLLoader(getClass().getResource(Const.PROCESSING_VIEW_PATH));
 			final Scene processingScene = new Scene((Pane) loader.load(), primaryStage.getScene().getWidth(), primaryStage.getScene().getHeight());
-			processingScene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			processingScene.getStylesheets().add(getClass().getResource(Const.APPLICATION_LAYOUT_PATH).toExternalForm());
 			primaryStage.setScene(processingScene);
 			ProcessingViewController controller = (ProcessingViewController) loader.getController();
 			controller.linkMainController(this);
@@ -103,7 +103,7 @@ public class Main extends Application {
 			System.out.println(imagePath);
 			try
 			{
-				FaceDetection.cropFaces(imagePath.substring(Constants.PATH_START_INDEX), "res/");
+				FaceDetection.cropFaces(imagePath.substring(Const.PATH_START_INDEX));
 			}
 			catch(FaceDetectionException e)
 			{
@@ -117,7 +117,7 @@ public class Main extends Application {
 			}
 			
 			//136 Image features
-			List<Integer> picFeatures = LandmarkExtractor.extract("res/croppedImage.png");
+			List<Integer> picFeatures = LandmarkExtractor.extract(Const.CROPPED_IMG_PATH);
 			System.out.println(picFeatures.size());
 					
 			if (!secure) {
@@ -156,9 +156,9 @@ public class Main extends Application {
 	 */
 	public void resultView(String outputText, String gender, String age, Image img) {
 		try {
-			final FXMLLoader loader = new FXMLLoader(getClass().getResource("view/ResultView.fxml"));
+			final FXMLLoader loader = new FXMLLoader(getClass().getResource(Const.RESULT_VIEW_PATH));
 			final Scene resultScene = new Scene((Pane) loader.load(), primaryStage.getScene().getWidth(), primaryStage.getScene().getHeight());
-			resultScene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			resultScene.getStylesheets().add(getClass().getResource(Const.APPLICATION_LAYOUT_PATH).toExternalForm());
 			primaryStage.setScene(resultScene);
 			ResultViewController controller = (ResultViewController) loader.getController();
 			controller.linkMainController(this);
@@ -177,10 +177,10 @@ public class Main extends Application {
 	 */
 	private void initStage(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-		primaryStage.setTitle(Constants.APP_NAME);
-		primaryStage.setMinWidth(Constants.MIN_WIDTH);
-		primaryStage.setMinHeight(Constants.MIN_HEIGHT);
-		primaryStage.getIcons().add(new Image("uw-icon.png"));
+		primaryStage.setTitle(Const.APP_NAME);
+		primaryStage.setMinWidth(Const.MIN_WIDTH);
+		primaryStage.setMinHeight(Const.MIN_HEIGHT);
+		primaryStage.getIcons().add(new Image(Const.UW_ICON_PATH));
 	}
 
 	@Override

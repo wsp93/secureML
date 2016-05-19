@@ -9,6 +9,8 @@ import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 
+import secureml.Const;
+
 public class FaceDetection {
 	/**
 	 * Percentage that dictates how big of a margin there should be around the faces.
@@ -24,7 +26,7 @@ public class FaceDetection {
 	 * @param outputImagePath Path to the directory where cropped faces will be saved.
 	 * @throws FaceDetectionException If 0 or more than 1 face detected. 
 	 */
-	public static void cropFaces(String sourceImagePath, String outputImagePath) throws FaceDetectionException {
+	public static void cropFaces(String sourceImagePath) throws FaceDetectionException {
 		System.out.println("Running FaceDetection");
 
 		// Create a face detector from the cascade file in the resources
@@ -46,9 +48,8 @@ public class FaceDetection {
 		// Crop the face out and save as a separate image
 		Rect rect = faceDetections.toArray()[0];
 		Mat croppedImage = new Mat(image, generateWiderRectangle(rect, image.width(), image.height()));
-	    String croppedImageFilePath = outputImagePath + "croppedImage.png";
-	    System.out.println("Writing " + croppedImageFilePath);
-	    Imgcodecs.imwrite(croppedImageFilePath, croppedImage);
+	    System.out.println("Writing " + Const.CROPPED_IMG_PATH);
+	    Imgcodecs.imwrite(Const.CROPPED_IMG_PATH, croppedImage);
 
 		// Draw a bounding box around the face
 		Imgproc.rectangle(image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255, 0));
