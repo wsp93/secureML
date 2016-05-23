@@ -44,8 +44,6 @@ public class ProcessingViewController extends Controller {
 	@FXML
 	private TextArea bytesTextArea;
 	@FXML
-	private TextArea charsTextArea;
-	@FXML
 	Button continueButton;
 	@FXML
 	ImageView gifImageView;
