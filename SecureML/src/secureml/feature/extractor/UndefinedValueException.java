@@ -15,4 +15,9 @@ package secureml.feature.extractor;
  */
 public class UndefinedValueException extends QueryException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1367814270798300559L;
+
 }

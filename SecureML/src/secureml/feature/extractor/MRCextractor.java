@@ -1,11 +1,7 @@
 package secureml.feature.extractor;
 import secureml.*;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.List;
 
 import secureml.ResLoader;
 
@@ -47,7 +43,7 @@ public class MRCextractor {
 	public ArrayList<Double> mrcOnString (String input) throws IOException, QueryException{
 		MRCDatabase mrcDb = null;
 		//load MRC database
-		mrcDb = new MRCDatabase(ResLoader.getInstance().loadFile("mrc2.dct"));
+		mrcDb = new MRCDatabase(this.getClass().getClassLoader().getResourceAsStream(Const.MRC_PATH));
 		ArrayList<Double> result  = new ArrayList<Double>();
 		String[] words = input.toUpperCase().replaceAll("[^\\w]", " ").split("\\s+");
 		int[] mrcFeatures = new int[14];

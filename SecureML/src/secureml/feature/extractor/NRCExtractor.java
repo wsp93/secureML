@@ -1,15 +1,13 @@
 package secureml.feature.extractor;
-import secureml.*;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import secureml.Const;
 import secureml.ResLoader;
 
 /**
@@ -24,7 +22,7 @@ import secureml.ResLoader;
 
 public class NRCExtractor {
 	
-	public HashMap<String, int[]> dictionary = loadDictionary("NRCDic.txt");	
+	public HashMap<String, int[]> dictionary = loadDictionary(Const.NRC_PATH);	
 	/*
 	public static void main (String[] args) {
 			
@@ -138,7 +136,7 @@ public class NRCExtractor {
 	public HashMap<String, int[]> loadDictionary (String file) {
 		HashMap<String, int[]> dictionary = new HashMap<String, int[]>();
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(ResLoader.getInstance().loadFile(file)));
+			BufferedReader br = new BufferedReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(file)));
 			br.readLine();
 			String line;
 			while((line = br.readLine()) != null) {
@@ -154,6 +152,7 @@ public class NRCExtractor {
 //				System.out.println();
 				dictionary.put(keyWord, values);
 			}
+			br.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

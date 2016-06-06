@@ -15,4 +15,9 @@ package secureml.feature.extractor;
  */
 public class QueryException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 756497664848443112L;
+
 }

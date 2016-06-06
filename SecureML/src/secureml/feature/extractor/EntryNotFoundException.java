@@ -14,4 +14,9 @@ package secureml.feature.extractor;
  */
 public class EntryNotFoundException extends QueryException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4726849130321700046L;
+
 }

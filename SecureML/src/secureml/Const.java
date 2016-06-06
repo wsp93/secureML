@@ -25,4 +25,11 @@ public class Const {
 	public static final String INPUT_VIEW_PATH = "view/InputView.fxml";
 	public static final String PROCESSING_VIEW_PATH = "view/ProcessingView.fxml";
 	public static final String RESULT_VIEW_PATH = "view/ResultView.fxml";
+	
+	public static final String MRC_PATH = "mrc2.dct";
+	public static final String NRC_PATH = "NRCDic.txt";
+	
+	public static final String LANDMARK_COMMAND = "python res/face_landmark_detection.py";
+	public static final String LANDMARK_DATA = "res/shape_predictor_68_face_landmarks.dat";
+	public static final String FACE_DETECTION_PATH = "res/lbpcascade_frontalface.xml";
 }

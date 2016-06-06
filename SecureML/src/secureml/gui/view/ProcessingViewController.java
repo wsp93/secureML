@@ -83,6 +83,12 @@ public class ProcessingViewController extends Controller {
 		outputText = "";
 		new Thread() {
 			public void run() {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				boolean[] results = PrivateSVMClient.globalClient.runTextPrediction(features, bytesTextArea);
 				outputText = results[0] + " " + results[1] + " " + results[2] + " " + 
 						results[3] + " " + results[4];

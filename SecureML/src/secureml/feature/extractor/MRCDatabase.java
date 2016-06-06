@@ -72,7 +72,7 @@ public class MRCDatabase extends LexicalDatabase {
      * @param dbFile file <code>mrc2.dct</code> from the MRC Psycholinguistic Database directory.
      * @throws IOException
      */
-    public MRCDatabase(File dbFile) throws IOException {
+    public MRCDatabase(InputStream dbFile) throws IOException {
         this(dbFile, 120038);
     }
     
@@ -83,7 +83,7 @@ public class MRCDatabase extends LexicalDatabase {
      * @param size number of entries in the file.
      * @throws IOException
      */
-    public MRCDatabase(File dbFile, int size) throws IOException {
+    public MRCDatabase(InputStream dbFile, int size) throws IOException {
         
         super(size);
         
@@ -97,7 +97,7 @@ public class MRCDatabase extends LexicalDatabase {
         
         MRCPoS.init();
         
-        BufferedReader reader = new BufferedReader(new FileReader(dbFile));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(dbFile));
 		String line;
 
 		while ((line = reader.readLine()) != null) {

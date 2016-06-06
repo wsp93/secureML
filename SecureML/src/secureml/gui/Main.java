@@ -99,8 +99,8 @@ public class Main extends Application {
 			textFeatures.addAll(mrc.mrcOnString(inputText));
 			textFeatures.addAll(liwc.extract(inputText));
 			
-			System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 			System.out.println(imagePath);
+			System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 			try
 			{
 				FaceDetection.cropFaces(imagePath.substring(Const.PATH_START_INDEX));

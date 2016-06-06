@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import secureml.Const;
+
 public class LandmarkExtractor {
 	
 	public static List<Integer> extract(String path)
@@ -17,9 +19,9 @@ public class LandmarkExtractor {
 		
 		try
 		{
-			Process p = Runtime.getRuntime().exec("python res/face_landmark_detection.py "
-					+ "res/shape_predictor_68_face_landmarks.dat "
-					+ path);
+			Process p = Runtime.getRuntime().exec(Const.LANDMARK_COMMAND + " "
+												+ Const.LANDMARK_DATA + " "
+												+ path);
 			BufferedReader stdInput = new BufferedReader(new
 	                									InputStreamReader(p.getInputStream()));
 			while ((s = stdInput.readLine()) != null) 
