@@ -101,6 +101,7 @@ public class Main extends Application {
 			
 			System.out.println(imagePath);
 			System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+			
 			try
 			{
 				FaceDetection.cropFaces(imagePath.substring(Const.PATH_START_INDEX));
@@ -124,7 +125,7 @@ public class Main extends Application {
 				String outputText = "Analyzing In Clear...\n";
 				outputText += "Text features:\n";
 				
-				Scanner inputScanner = new Scanner(ResLoader.getInstance().loadFile("textFeatureNames"));
+				Scanner inputScanner = new Scanner(this.getClass().getClassLoader().getResourceAsStream("textFeatureNames"));
 				List<String> textFeaturesNames = StringUtils.parseStringList(inputScanner);
 				
 				for (int i = 0; i < textFeatures.size(); i++) {

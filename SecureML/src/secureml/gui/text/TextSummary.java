@@ -1,6 +1,6 @@
 package secureml.gui.text;
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,7 +55,7 @@ public class TextSummary {
 	 * @throws Exception
 	 */
 	public void loadDictionary(Map<String, String> dict) throws Exception {
-		BufferedReader br = new BufferedReader(new FileReader(ResLoader.getInstance().loadFile("dictionary")));
+		BufferedReader br = new BufferedReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("dictionary")));
 		String line = br.readLine();
 		while (line != null) {
 			line = line.replace("\"", "");
@@ -70,7 +70,7 @@ public class TextSummary {
 	 * @throws Exception - file IO exception
 	 */
 	public void loadDescription(Map<String, String> desc) throws Exception {
-		BufferedReader br = new BufferedReader(new FileReader(ResLoader.getInstance().loadFile("description")));
+		BufferedReader br = new BufferedReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("description")));
 		String line = br.readLine();
 		int counter = 0;
 		while (line != null) {
