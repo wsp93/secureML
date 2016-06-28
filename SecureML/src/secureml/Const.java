@@ -14,10 +14,6 @@ public class Const {
 	/*							   FILE PATHS   						*/
 	/********************************************************************/
 	
-	// getURI() returns a string "file:ACTUAL_PATH_HERE"
-	// To get the actual path, we don't need the "file:" part of the string.
-	public static final int PATH_START_INDEX = 5;
-	
 	public static final String UW_ICON_PATH = "uw-icon.png";
 	public static final String CROPPED_IMG_PATH = "res/croppedImage.png";
 	

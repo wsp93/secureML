@@ -10,6 +10,7 @@
 package secureml.gui.view;
 
 import java.io.File;
+import java.net.URI;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
@@ -94,8 +95,10 @@ public class InputViewController extends Controller {
 		chooser.getExtensionFilters().add(new ExtensionFilter("Image Files", "*.png", "*.jpg"));
 		File selection = chooser.showOpenDialog(mainApp.primaryStage);
 		if (selection != null) {
-			inputImageView.setImage(new Image(selection.toURI().toString()));
-			imageFilePath = selection.toURI().toString();
+			URI imgUri = selection.toURI();
+			
+			inputImageView.setImage(new Image(imgUri.toString()));
+			imageFilePath = imgUri.getPath();
 			imageChosen = true;
 		}
 	}

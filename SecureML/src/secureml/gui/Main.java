@@ -104,7 +104,7 @@ public class Main extends Application {
 			
 			try
 			{
-				FaceDetection.cropFaces(imagePath.substring(Const.PATH_START_INDEX));
+				FaceDetection.cropFaces(imagePath);
 			}
 			catch(FaceDetectionException e)
 			{
