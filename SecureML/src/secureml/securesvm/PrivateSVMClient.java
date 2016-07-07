@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import javafx.scene.control.TextArea;
+import secureml.Const;
 
 public class PrivateSVMClient {
 
@@ -16,8 +17,10 @@ public class PrivateSVMClient {
 
 	public static long featureMultiplier = 1000000;
 
-	public static String trustedInitializerAddress = "secureml.insttech.washington.edu";
-	public static final int trustedInitializerPort = 1235;
+	//~ private static String serverAddress = Const.SERVER_IP;
+	//~ private static int serverPort = Const.SECURE_PORT;
+	//~ private static String trustedInitializerAddress = Const.TI_IP;
+	//~ private static int trustedInitializerPort = Const.TI_PORT;
 
 	private static final BigInteger modulus = BigInteger.ONE.shiftLeft(64);
 
@@ -25,18 +28,15 @@ public class PrivateSVMClient {
 	private static String[] imgModels = {"sex","50-50", "young", "old"}; 
 	public static int numTextFeatures = 43;
 	public static int numImgFeatures = 136;
-	private static String serverAddress = "secureml.insttech.washington.edu";
-	private static int serverPort = 1432;
 
 	private TrustedInitializer ted;
 	private Socket server;
 
-	public PrivateSVMClient(String[] addresses) {
-		if (addresses.length == 2)
-		{
-			trustedInitializerAddress = addresses[0];
-			serverAddress = addresses[1];
-		}
+	public PrivateSVMClient(String serverAddress, String trustedInitializerAddress, int serverPort, int trustedInitializerPort) {
+		//~ serverAddress = _serverAddress;
+		//~ trustedInitializerAddress = _trustedInitializerAddress;
+		//~ serverPort = _serverPort;
+		//~ trustedInitializerPort = _trustedInitializerPort;
 
 		try 
 		{
@@ -163,7 +163,7 @@ public class PrivateSVMClient {
 				0.00000000e+00,   2.98062593e-01,   1.49031297e+01};
 		Scanner key = new Scanner(System.in);
 
-		PrivateSVMClient ppClient = new PrivateSVMClient(new String[]{"localhost","localhost"});
+		PrivateSVMClient ppClient = new PrivateSVMClient(Const.SERVER_IP, Const.TI_IP, Const.SECURE_PORT, Const.TI_PORT);
 		key.nextLine();
 		ppClient.runTextPrediction(values, null);
 		List<Integer> features = new ArrayList<Integer>();

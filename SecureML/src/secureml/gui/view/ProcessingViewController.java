@@ -35,6 +35,12 @@ public class ProcessingViewController extends Controller {
 	/** The gif animation to indicate that the program is processing data in the clear. */
 	private static final Image IN_THE_CLEAR_GIF = ResLoader.getInstance().loadImage("in-the-clear-animation.gif");
 
+	private String serverIP;
+	private String tiIP;
+	private int securePort;
+	private int clearPort;
+	private int tiPort;
+
 	private String inputText;
 	private Image inputImage;
 	private boolean secure;
@@ -64,10 +70,10 @@ public class ProcessingViewController extends Controller {
 		}
 	}
 
-	public void analyzeData(ArrayList<Double> features, List<Integer> picFeatures) {
+	public void analyzeData(String ip, int port, ArrayList<Double> features, List<Integer> picFeatures) {
 		// TODO incorporate the methods of analysis on inputText and inputImage here!
 		SVMClient svmClient = new SVMClient(features, picFeatures);
-		String result = svmClient.predict();
+		String result = svmClient.predict(ip, port);
 		System.out.println(result);
 		this.outputText = result.split(",gender")[0];
 		System.out.println(outputText);
@@ -78,9 +84,11 @@ public class ProcessingViewController extends Controller {
 		continueButton.setDisable(false);
 	}
 
-	public void secureAnalyzeData(double[] features, List<Integer> picFeatures) {
+	public void secureAnalyzeData(String serverIP, String tiIP, int securePort, int tiPort, double[] features, List<Integer> picFeatures) {
 		// TODO incorporate the methods of analysis on inputText and inputImage here!
 		outputText = "";
+		//Initialize Private Client so it can fetch random data  << Caleb
+		PrivateSVMClient.globalClient = new PrivateSVMClient(serverIP, tiIP, securePort, tiPort);
 		new Thread() {
 			public void run() {
 				try {

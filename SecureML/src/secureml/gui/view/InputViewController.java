@@ -117,6 +117,14 @@ public class InputViewController extends Controller {
 	}
 	
 	/**
+	 * This method is called when the user presses the "Options" button.
+	 */
+	@FXML
+	private void optionsButtonPressed() {
+		mainApp.optionsView();
+	}
+	
+	/**
 	 * Gets the text input entered by the user.
 	 * @return the return String of {@link #inputTextArea}.getText().
 	 * 		   Will be an empty String if the user has not input any text.

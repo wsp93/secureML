@@ -48,6 +48,23 @@ import secureml.svm.StringUtils;
 public class Main extends Application {
 	/** The primary stage for this application. */
 	public Stage primaryStage;
+	
+	private String serverIP = Const.SERVER_IP;
+	private String tiIP = Const.TI_IP;
+	private int securePort = Const.SECURE_PORT;
+	private int clearPort = Const.CLEAR_PORT;
+	private int tiPort = Const.TI_PORT;
+	
+	/**
+	 * Set IP and Ports for Server and TrustedInitializer.
+	 */
+	public void setNetworkInfo(String serverIP, String tiIP, int securePort, int clearPort, int tiPort) {
+		this.serverIP = serverIP;
+		this.tiIP = tiIP;
+		this.securePort = securePort;
+		this.clearPort = clearPort;
+		this.tiPort = tiPort;
+	}
 
 	/**
 	 * Displays the InputView.fxml Scene.
@@ -65,8 +82,27 @@ public class Main extends Application {
 			primaryStage.setScene(inputScene);
 			((Controller) loader.getController()).linkMainController(this);
 			primaryStage.show();
-			//Initialize Private Client so it can fetch random data  << Caleb
-			PrivateSVMClient.globalClient = new PrivateSVMClient(new String[]{});
+		} catch (final IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Displays the OptionsView.fxml Scene.
+	 */
+	public void optionsView() {
+		try {
+			final FXMLLoader loader = new FXMLLoader(getClass().getResource(Const.OPTIONS_VIEW_PATH));
+			Scene optionsScene;
+			if (primaryStage.getScene() == null) {
+				optionsScene = new Scene((Pane) loader.load());
+			} else {
+				optionsScene = new Scene((Pane) loader.load(), primaryStage.getScene().getWidth(), primaryStage.getScene().getHeight());
+			}
+			optionsScene.getStylesheets().add(getClass().getResource(Const.APPLICATION_LAYOUT_PATH).toExternalForm());
+			primaryStage.setScene(optionsScene);
+			((Controller) loader.getController()).linkMainController(this);
+			primaryStage.show();
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}
@@ -138,14 +174,14 @@ public class Main extends Application {
 				controller.setInputs(outputText, secure, inputImage);
 				
 				//sending the extracted features to analyze
-				controller.analyzeData(textFeatures, picFeatures);
+				controller.analyzeData(serverIP, clearPort, textFeatures, picFeatures);
 			} else { //Secure is greenlit << Caleb
 				System.out.println(textFeatures.size());
 				double[] featureArray = new double[PrivateSVMClient.numTextFeatures];
 				for (int p = 0; p < PrivateSVMClient.numTextFeatures; p++)
 					featureArray[p] = textFeatures.get(p);
 				controller.setInputs("<<< Protocol Log >>>\n\n", secure, inputImage);
-				controller.secureAnalyzeData(featureArray, picFeatures);
+				controller.secureAnalyzeData(serverIP, tiIP, securePort, tiPort, featureArray, picFeatures);
 			}
 		} catch (final IOException e) {
 			e.printStackTrace();

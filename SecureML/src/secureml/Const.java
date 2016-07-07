@@ -1,6 +1,15 @@
 package secureml;
 
 public class Const {
+	/********************************************************************/
+	/*							IP/PORT DEFAULTS   						*/
+	/********************************************************************/
+	public static final String SERVER_IP = "secureml.insttech.washington.edu";
+	public static final String TI_IP = "secureml.insttech.washington.edu";
+	
+	public static final int SECURE_PORT = 1432;
+	public static final int CLEAR_PORT = 6666;
+	public static final int TI_PORT = 1235;
 	
 	/********************************************************************/
 	/*							WINDOW CONSTANTS						*/
@@ -19,6 +28,7 @@ public class Const {
 	
 	public static final String APPLICATION_LAYOUT_PATH = "application.css";
 	public static final String INPUT_VIEW_PATH = "view/InputView.fxml";
+	public static final String OPTIONS_VIEW_PATH = "view/OptionsView.fxml";
 	public static final String PROCESSING_VIEW_PATH = "view/ProcessingView.fxml";
 	public static final String RESULT_VIEW_PATH = "view/ResultView.fxml";
 	

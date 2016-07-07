@@ -8,18 +8,18 @@ import java.util.List;
 // test git from eclipse
 public class SVMClient
 {
-	public static final String hostName = "140.142.71.66";
-	public static final int portNumber = 6666;
+	//~ public static final String hostName = "140.142.71.66";
+	//~ public static final int portNumber = 6666;
 //	public static final String textInputFile = "testTextInput.txt";
 //	public static final String picInputFile = "testPicInput.txt";
 	
 	private ArrayList<Double> textFeatures;
 	private List<Integer> picFeatures;
 	
-	public String predict() {
+	public String predict(String ip, int port) {
 		try
 		{
-			Socket socket = new Socket(hostName, portNumber);
+			Socket socket = new Socket(ip, port);
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
