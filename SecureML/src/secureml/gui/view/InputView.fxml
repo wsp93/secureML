@@ -38,6 +38,7 @@
                            </children>
                         </FlowPane>
                         <Button mnemonicParsing="false" onAction="#clearEntries" text="Clear Entries" />
+                        <Button mnemonicParsing="false" onAction="#optionsButtonPressed" text="Options" />
                      </children>
                   </VBox>
                </children>
